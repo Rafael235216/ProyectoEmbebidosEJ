@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Laberinto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Neucha&family=Roboto:ital,wght@0,700;1,900&family=Sigmar&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script>
+      const url = "http://192.168.72.10"; // Dirección IP de la ESP32
+
+      function setLevel(level) {
+        fetch(`${url}/set`, { // Cambiado a "/set"
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          
+          body: JSON.stringify({ level: level }),
+        })
+        .then(response => response.json())
+        .then(data => console.log("Success:", data))
+        .catch(error => console.error("Error:", error));
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="color: blue; animation: bounce 1s infinite;">Mi Laberinto</h1>
+
+      <div class="buttons">
+        <button onclick="setLevel(1)" class="button-56" role="button">Nivel 1</button>
+        <button onclick="setLevel(2)" class="button-56" role="button">Nivel 2</button>
+        <button onclick="setLevel(3)" class="button-56" role="button">Nivel 3</button>
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    import preline from "https://cdn.jsdelivr.net/npm/preline@2.4.1/+esm";
+  </script>
+</html>
